@@ -5,8 +5,10 @@ import DS.Node;
 import java.util.Objects;
 
 public class NodeUtils {
+  
   @SafeVarargs
   public static <T> Node<T> newFrom(T... vals) {
+    // Creates a list of nodes from an array/vararg of values
     Node<T> head = new Node<>(vals[vals.length - 1]);
     for (int i = vals.length - 2; i >= 0; i--) {
       head = new Node<>(vals[i], head);
@@ -15,12 +17,12 @@ public class NodeUtils {
   }
   
   public static <T> String toString(Node<T> head) {
-    String ret = head.toString();
+    StringBuilder ret = new StringBuilder(head.toString());
     while (head.hasNext()) {
       head = head.getNext();
-      ret += head;
+      ret.append(head);
     }
-    return ret;
+    return ret.toString();
   }
   
   public static <T> Node<T> getLast(Node<T> head) {
@@ -114,9 +116,12 @@ public class NodeUtils {
   }
   
   public static Node<Integer> sort(Node<Integer> fst) {
+    // Selection sort for list of nodes
+    
     Node<Integer> head = findMinP(fst);
-    fst = remove(fst, findMinP(fst));
     Node<Integer> last = head;
+    
+    fst = remove(fst, head);
     while (fst != null) {
       last.setNext(findMinP(fst));
       last = last.getNext();
@@ -126,13 +131,17 @@ public class NodeUtils {
     return head;
   }
   
+  // assumes a isn't null
   public static <T> Node<T> mergeNotSorted(Node<T> a, Node<T> b) {
     getLast(a).setNext(b);
     return a;
   }
   
+  // assumes both a and b aren't null
   public static Node<Integer> mergeSorted(Node<Integer> a, Node<Integer> b) {
     Node<Integer> head;
+    
+    // Get first element
     if (a.getValue() < b.getValue()) {
       head = a;
       a = a.getNext();
@@ -143,6 +152,7 @@ public class NodeUtils {
     
     Node<Integer> last = head;
     
+    // Loop until one list is finished
     while (a != null && b != null) {
       if (a.getValue() < b.getValue()) {
         last.setNext(a);
@@ -151,8 +161,9 @@ public class NodeUtils {
         last.setNext(b);
         b = b.getNext();
       }
+      last = last.getNext();
     }
-    
+    // Append remainder of other list to end
     if (a == null) return mergeNotSorted(head, b);
     return mergeNotSorted(head, a);
   }
@@ -171,12 +182,5 @@ public class NodeUtils {
       arr[i] = (int) (Math.random() + (to - from + 1)) + to;
     }
     return newFrom(arr);
-  }
-  
-  public static void main(String[] args) {
-    Node<Integer> lst = newFrom(1, 5, 2, 3, 4, 4, 6, 4);
-    System.out.println(toString(sort(lst)));
-    removeDups(lst);
-    System.out.println(toString(lst));
   }
 }
