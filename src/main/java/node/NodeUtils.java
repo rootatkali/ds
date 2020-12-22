@@ -16,7 +16,7 @@ public class NodeUtils {
     return head;
   }
   
-  public static <T> String toString(Node<T> head) {
+  public static <T> String stringify(Node<T> head) {
     StringBuilder ret = new StringBuilder(head.toString());
     while (head.hasNext()) {
       head = head.getNext();
@@ -33,6 +33,13 @@ public class NodeUtils {
     return head;
   }
   
+  public static <T> Node<T> getNode(Node<T> head, int index) {
+    for (int i = 0; i < index; i++) {
+      head = head.getNext();
+    }
+    return head;
+  }
+  
   public static <T> int size(Node<T> head) {
     Node<T> crt = head;
     int size = 0;
@@ -46,6 +53,18 @@ public class NodeUtils {
   public static <T> int sizeR(Node<T> head) {
     if (head == null) return 0;
     return 1 + sizeR(head.getNext());
+  }
+  
+  public static <T> boolean equals(Node<T> a, Node<T> b) {
+    if (a == b) return true;
+    
+    while (a != null && b != null) {
+      if (!Objects.equals(a.getValue(), b.getValue())) return false;
+      a = a.getNext();
+      b = b.getNext();
+    }
+    
+    return a == null && b == null;
   }
   
   public static <T> boolean contains(Node<T> list, T val) {
@@ -168,6 +187,7 @@ public class NodeUtils {
     return mergeNotSorted(head, a);
   }
   
+  // Requires sorted list
   public static void removeDups(Node<Integer> fst) {
     while (fst != null && fst.hasNext()) {
       if (fst.getValue() == fst.getNext().getValue()) {

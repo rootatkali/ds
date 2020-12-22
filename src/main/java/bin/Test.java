@@ -26,11 +26,12 @@ public class Test {
   
   public static void main(String[] args) {
     BinNode<Integer> root = new BinNode<>(0);
-    BinNode<Integer> top = new BinNode<>(1);
-    BinNode<Integer> bot = new BinNode<>(2);
-    root.setLeft(top);
-    root.setRight(bot);
+    BinNode<Integer> left = new BinNode<>(1);
+    BinNode<Integer> right = new BinNode<>(2);
+    root.setLeft(left);
+    root.setRight(right);
     BinNode<Integer> more = new BinNode<>(root, 3, root);
-    System.out.println(visualize(more));
+    BinNode<Integer> aaa = new BinNode<>(root, 4, more);
+    System.out.println(visualize(aaa));
   }
 }
