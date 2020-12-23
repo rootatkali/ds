@@ -28,5 +28,7 @@ public class TriList {
     Node<Integer> notTriList = newFrom(1, 2, 3, 1, 2, 4, 1, 2, 3);
     System.out.println(isTriList(triList));
     System.out.println(isTriList(notTriList));
+  
+    System.out.println(stringify(copy(triList)));
   }
 }

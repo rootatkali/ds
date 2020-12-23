@@ -25,6 +25,17 @@ public class NodeUtils {
     return ret.toString();
   }
   
+  public static <T> Node<T> copy(Node<T> head) {
+    Node<T> ret = new Node<>(head.getValue());
+    Node<T> last = ret;
+    while (head.hasNext()) {
+      last.setNext(new Node<>(head.getNext().getValue()));
+      head = head.getNext();
+      last = last.getNext();
+    }
+    return ret;
+  }
+  
   public static <T> Node<T> getLast(Node<T> head) {
     while (head.hasNext()) {
       head = head.getNext();
