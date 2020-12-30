@@ -17,6 +17,8 @@ public class NodeUtils {
   }
   
   public static <T> String stringify(Node<T> head) {
+    if (head == null) return "null";
+    
     StringBuilder ret = new StringBuilder(head.toString());
     while (head.hasNext()) {
       head = head.getNext();
