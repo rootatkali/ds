@@ -46,6 +46,21 @@ public class Runner {
     return copy(lstItems);
   }
   
+  public Runner addItems(Item... items) {
+    if (lstItems == null) {
+      lstItems = new Node<>(new Item(items[0]));
+    } else {
+      NodeUtils.getLast(lstItems).setNext(new Node<>(new Item(items[0])));
+    }
+    
+    for (int j = 1; j < items.length; j++) {
+      Item i = items[j];
+      NodeUtils.getLast(lstItems).setNext(new Node<>(new Item(i)));
+    }
+    
+    return this;
+  }
+  
   public void setLstItems(Node<Item> lstItems) {
     this.lstItems = copy(lstItems);
   }
@@ -53,7 +68,7 @@ public class Runner {
   @Override
   public String toString() {
     return "Runner{" +
-        "id='" + id + '\'' +
+        "id=\"" + id + '"' +
         ", yearB=" + yearB +
         ", lstItems=" + NodeUtils.stringify(lstItems) +
         '}';

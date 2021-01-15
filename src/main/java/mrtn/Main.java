@@ -2,6 +2,8 @@ package mrtn;
 
 import DS.Node;
 
+import java.util.Arrays;
+
 public class Main {
   private static int consec(Runner r) {
     Node<Item> lst = r.getLstItems();
@@ -40,28 +42,37 @@ public class Main {
   }
   
   public static void main(String[] args) {
-    MrtnRace race = new MrtnRace("ISR", 2020);
-    Runner r = new Runner("1", 2004);
-    Runner r2 = new Runner("2", 2003);
-    race.addRunner(r);
-    race.addRunner(r2);
-    race.addScoreToRunner("1", 10);
-    System.out.println(race);
+    MrtnRace race = new MrtnRace("ISR", 2021);
+    Runner r1 = new Runner("1", 2004)
+        .addItems(
+            new Item(2014, 100),
+            new Item(2016, 97),
+            new Item(2018, 102),
+            new Item(2019, 85),
+            new Item(2020, 93)
+        );
+    Runner r2 = new Runner("2", 2003)
+        .addItems(
+            new Item(2014, 103),
+            new Item(2015, 96),
+            new Item(2017, 102),
+            new Item(2018, 84),
+            new Item(2020, 93)
+        );
+    Runner r3 = new Runner("3", 2002);
+    r3.setLstItems(r2.getLstItems().getNext()); // Same as r2 (copied items), but from second year
+    Runner r4 = new Runner("4", 2004)
+        .addItems(
+            new Item(2020, 76)
+        );
+    Runner r5 = new Runner("5", 2000);
   
-    MrtnRace race2 = new MrtnRace("RUS", 2021);
-    race2.addRunner(r);
-    race2.addScoreToRunner("1", 11);
-    System.out.println(race2);
+    Runner[] runners = {r1, r2, r3, r4, r5};
     
-    MrtnRace race3 = new MrtnRace("GER", 2019);
-    race3.addRunner(r);
-    race3.addScoreToRunner("1", 9);
-  
-    MrtnRace race4 = new MrtnRace("USA", 2019);
-    race4.addRunner(r);
-    race4.addScoreToRunner("1", 9);
-  
-    System.out.println(race4);
-    System.out.println(champions(race));
+    Arrays.stream(runners).forEach(race::addRunner); // add all to race
+    
+    Arrays.stream(runners).map(Runner::getId).forEach(id -> race.addScoreToRunner(id, (int) (Math.random() * 10) + 95));
+    System.out.println(race);
+    System.out.println("# of champions: " + champions(race));
   }
 }

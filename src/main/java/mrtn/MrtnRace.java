@@ -39,6 +39,8 @@ public class MrtnRace {
   }
   
   public void addRunner(Runner r) {
+    r = new Runner(r);
+    
     if (lstRunners == null) {
       lstRunners = new Node<>(r);
       return;
@@ -94,7 +96,7 @@ public class MrtnRace {
   @Override
   public String toString() {
     return "MrtnRace{" +
-        "country='" + country + '\'' +
+        "country=\"" + country + '"' +
         ", year=" + year +
         ", lstRunners=" + NodeUtils.stringify(lstRunners) +
         '}';
