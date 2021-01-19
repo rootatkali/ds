@@ -8,6 +8,18 @@ import java.util.List;
 import java.util.Objects;
 
 public class StackUtils {
+  /**
+   * Returns a new stack with the elements of vals, when vals[0] is on the top of the stack
+   */
+  @SafeVarargs
+  public static <T> Stack<T> newFrom(T... vals) {
+    Stack<T> ret = new Stack<>();
+    for (int i = vals.length - 1; i >= 0; i--) {
+      ret.push(vals[i]);
+    }
+    return ret;
+  }
+  
   public static <T> Stack<T> copy(Stack<T> s) {
     Stack<T> tmp = new Stack<>(); // temp stack for copy
     Stack<T> ret = new Stack<>(); // return
@@ -48,18 +60,6 @@ public class StackUtils {
       if (!Objects.equals(ac.pop(), bc.pop())) return false;
     }
     return ac.isEmpty() && bc.isEmpty();
-  }
-  
-  /**
-   * Returns a new stack with the elements of vals, when vals[0] is on the top of the stack
-   */
-  @SafeVarargs
-  public static <T> Stack<T> newFrom(T... vals) {
-    Stack<T> ret = new Stack<>();
-    for (int i = vals.length - 1; i >= 0; i--) {
-      ret.push(vals[i]);
-    }
-    return ret;
   }
   
   public static <T> void reverse(Stack<T> s) {
