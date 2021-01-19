@@ -10,7 +10,7 @@ public class QueueNode {
     if (n == 2) return true;
     if (n % 2 == 0) return false;
     
-    for (int i = 3; i <= n / 2; i+= 2) {
+    for (int i = 3; i <= Math.ceil(Math.sqrt(n)); i+= 2) {
       if (n % i == 0) return false;
     }
     
@@ -60,6 +60,6 @@ public class QueueNode {
    * Define n = lst.length. Assume queue.length ~= lst.length.
    * n is not bound.
    * Define m = each number's length. m is not bound.
-   * Total complexity: O(n^2*m)
+   * Total complexity: O(n^2*sqrt(m))
    */
 }
