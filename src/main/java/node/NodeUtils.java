@@ -2,7 +2,10 @@ package node;
 
 import DS.Node;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Stream;
 
 public class NodeUtils {
   
@@ -87,6 +90,19 @@ public class NodeUtils {
       head = head.getNext();
     }
     return false;
+  }
+  
+  public static <T> List<T> toArrayList(Node<T> lst) {
+    List<T> ret = new ArrayList<>();
+    while (lst != null) {
+      ret.add(lst.getValue());
+      lst = lst.getNext();
+    }
+    return ret;
+  }
+  
+  public static <T> Stream<T> toStream(Node<T> lst) {
+    return toArrayList(lst).stream();
   }
   
   public static <T> void insertAfter(Node<T> aft, Node<T> lst) {

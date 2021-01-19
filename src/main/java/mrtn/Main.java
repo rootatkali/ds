@@ -1,6 +1,7 @@
 package mrtn;
 
 import DS.Node;
+import node.NodeUtils;
 
 import java.util.Arrays;
 
@@ -39,6 +40,10 @@ public class Main {
     }
     
     return cnt;
+  }
+  
+  public static int championsStream(MrtnRace m) {
+    return (int) NodeUtils.toStream(m.getLstRunners()).map(Main::consec).filter(i -> i >= 3).count();
   }
   
   public static void main(String[] args) {
