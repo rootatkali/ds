@@ -68,6 +68,17 @@ public class QueueUtils {
     return found;
   }
   
+  public static <T> boolean containsReference(Queue<T> q, T val) {
+    boolean found = false;
+    Queue<T> tmp = new Queue<>();
+    while (!q.isEmpty()) {
+      if (val == q.head()) found = true;
+      tmp.insert(q.remove());
+    }
+    move(tmp, q);
+    return found;
+  }
+  
   public static boolean contains(Queue<Integer> q, int val) {
     return occInQueue(q, val) > 0;
   }

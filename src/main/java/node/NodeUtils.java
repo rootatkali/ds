@@ -1,6 +1,8 @@
 package node;
 
 import DS.Node;
+import DS.Queue;
+import queue.QueueUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +101,16 @@ public class NodeUtils {
       lst = lst.getNext();
     }
     return ret;
+  }
+  
+  public static <T> boolean isLoop(Node<T> lst) {
+    Queue<Node<T>> store = new Queue<>();
+    while (lst != null) {
+      if (QueueUtils.containsReference(store, lst)) return true;
+      store.insert(lst);
+      lst = lst.getNext();
+    }
+    return false;
   }
   
   public static <T> Stream<T> toStream(Node<T> lst) {
