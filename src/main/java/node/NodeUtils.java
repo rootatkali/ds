@@ -29,6 +29,7 @@ public class NodeUtils {
       head = head.getNext();
       ret.append(head);
     }
+    
     return ret.toString();
   }
   
@@ -223,9 +224,9 @@ public class NodeUtils {
       }
       last = last.getNext();
     }
-    // Append remainder of other list to end
-    if (a == null) return mergeNotSorted(head, b);
-    return mergeNotSorted(head, a);
+  
+    // Append remainder of other list to end and return
+    return mergeNotSorted(head, a == null ? b : a);
   }
   
   // Requires sorted list
