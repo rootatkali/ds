@@ -241,7 +241,7 @@ public class NodeUtils {
   public static Node<Integer> randList(int length, int from, int to) {
     Integer[] arr = new Integer[length];
     for (int i = 0; i < length; i++) {
-      arr[i] = (int) (Math.random() + (to - from + 1)) + to;
+      arr[i] = (int) (Math.random() * (to - from + 1)) + from;
     }
     return newFrom(arr);
   }
