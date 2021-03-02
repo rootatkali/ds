@@ -98,4 +98,34 @@ public class TreeUtils {
     if (tree == null) return 0;
     return 1 + Math.max(cntLvlR(tree.getLeft()), cntLvlR(tree.getRight()));
   }
+  
+  private static <T> boolean isBig(BinNode<T> tree) {
+    return tree != null && tree.hasLeft() && tree.hasRight();
+  }
+  
+  public static <T> boolean twoOrZeroSons(BinNode<T> tree) {
+    if (tree == null) return false;
+    if (isLeaf(tree)) return true;
+    if (!isBig(tree)) return false;
+    return twoOrZeroSons(tree.getLeft()) && twoOrZeroSons(tree.getRight());
+  }
+  
+  public static <T> String valsAtLevel(BinNode<T> tree, int level) {
+    if (tree == null) return "";
+    if (level == 1) return String.valueOf(tree.getValue());
+    return (valsAtLevel(tree.getLeft(), level - 1) + " " + valsAtLevel(tree.getRight(), level - 1))
+        .replaceAll("\\s+", " ").trim();
+  }
+  
+  public static <T> boolean containsAll(BinNode<T> t1, BinNode<T> t2) {
+    if (t1 == null) return false;
+    if (isLeaf(t2)) return contains(t1, t2.getValue());
+    return contains(t1, t2.getValue()) &&
+        (!t2.hasLeft() || containsAll(t1, t2.getLeft())) &&
+        (!t2.hasRight() || containsAll(t1, t2.getRight()));
+  }
+  
+  public static <T> boolean equalsByVal(BinNode<T> t1, BinNode<T> t2) {
+    return containsAll(t1, t2) && containsAll(t2, t1);
+  }
 }
