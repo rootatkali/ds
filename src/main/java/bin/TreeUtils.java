@@ -79,4 +79,23 @@ public class TreeUtils {
     if (tree == null) return false;
     return Objects.equals(val, tree.getValue()) || contains(tree.getLeft(), val) || contains(tree.getRight(), val);
   }
+  
+  public static <T> boolean containsNode(BinNode<T> tree, BinNode<T> node) {
+    if (tree == null) return false;
+    return tree == node || containsNode(tree.getLeft(), node) || containsNode(tree.getRight(), node);
+  }
+  
+  public static <T> BinNode<T> findNodeByVal(BinNode<T> tree, T val) {
+    if (val == null) return null;
+    if (tree == null) return null;
+    if (tree.getValue() == val) return tree;
+    if (findNodeByVal(tree.getLeft(), val) != null) return findNodeByVal(tree.getLeft(), val);
+    if (findNodeByVal(tree.getRight(), val) != null) return findNodeByVal(tree.getRight(), val);
+    return null;
+  }
+  
+  public static <T> int cntLvlR(BinNode<T> tree) {
+    if (tree == null) return 0;
+    return 1 + Math.max(cntLvlR(tree.getLeft()), cntLvlR(tree.getRight()));
+  }
 }
