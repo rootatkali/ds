@@ -18,7 +18,7 @@ public class Printer {
       return;
     
     int floor = maxLevel - level;
-    int endgeLines = (int) Math.pow(2, (Math.max(floor - 1, 0)));
+    int edgeLines = (int) Math.pow(2, (Math.max(floor - 1, 0)));
     int firstSpaces = (int) Math.pow(2, (floor)) - 1;
     int betweenSpaces = (int) Math.pow(2, (floor + 1)) - 1;
     
@@ -40,11 +40,11 @@ public class Printer {
     }
     System.out.println("");
     
-    for (int i = 1; i <= endgeLines; i++) {
+    for (int i = 1; i <= edgeLines; i++) {
       for (int j = 0; j < nodes.size(); j++) {
         Printer.printWhitespaces(firstSpaces - i);
         if (nodes.get(j) == null) {
-          Printer.printWhitespaces(endgeLines + endgeLines + i + 1);
+          Printer.printWhitespaces(edgeLines + edgeLines + i + 1);
           continue;
         }
         
@@ -60,7 +60,7 @@ public class Printer {
         else
           Printer.printWhitespaces(1);
         
-        Printer.printWhitespaces(endgeLines + endgeLines - i);
+        Printer.printWhitespaces(edgeLines + edgeLines - i);
       }
       
       System.out.println("");

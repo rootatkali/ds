@@ -80,6 +80,11 @@ public class TreeUtils {
     return Objects.equals(val, tree.getValue()) || contains(tree.getLeft(), val) || contains(tree.getRight(), val);
   }
   
+  public static <T> boolean containsReference(BinNode<T> tree, T val) {
+    if (tree == null) return false;
+    return tree.getValue() == val || containsReference(tree.getLeft(), val) || containsReference(tree.getRight(), val);
+  }
+  
   public static <T> boolean containsNode(BinNode<T> tree, BinNode<T> node) {
     if (tree == null) return false;
     return tree == node || containsNode(tree.getLeft(), node) || containsNode(tree.getRight(), node);
@@ -111,21 +116,20 @@ public class TreeUtils {
   }
   
   public static <T> String valsAtLevel(BinNode<T> tree, int level) {
-    if (tree == null) return "";
-    if (level == 1) return String.valueOf(tree.getValue());
+    if (tree == null || level < 0) return "";
+    if (level == 0) return String.valueOf(tree.getValue());
     return (valsAtLevel(tree.getLeft(), level - 1) + " " + valsAtLevel(tree.getRight(), level - 1))
         .replaceAll("\\s+", " ").trim();
   }
   
-  public static <T> boolean containsAll(BinNode<T> t1, BinNode<T> t2) {
-    if (t1 == null) return false;
-    if (isLeaf(t2)) return contains(t1, t2.getValue());
-    return contains(t1, t2.getValue()) &&
-        (!t2.hasLeft() || containsAll(t1, t2.getLeft())) &&
-        (!t2.hasRight() || containsAll(t1, t2.getRight()));
+  public static <T> boolean containsAll(BinNode<T> tree1, BinNode<T> tree2) {
+    if (tree1 == null) return false;
+    return contains(tree1, tree2.getValue()) &&
+        (!tree2.hasLeft() || containsAll(tree1, tree2.getLeft())) &&
+        (!tree2.hasRight() || containsAll(tree1, tree2.getRight()));
   }
   
-  public static <T> boolean equalsByVal(BinNode<T> t1, BinNode<T> t2) {
-    return containsAll(t1, t2) && containsAll(t2, t1);
+  public static <T> boolean equalsByVal(BinNode<T> tree1, BinNode<T> tree2) {
+    return containsAll(tree1, tree2) && containsAll(tree2, tree1);
   }
 }
