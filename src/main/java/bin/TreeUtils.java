@@ -1,6 +1,7 @@
 package bin;
 
 import DS.BinNode;
+import DS.Queue;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -131,5 +132,22 @@ public class TreeUtils {
   
   public static <T> boolean equalsByVal(BinNode<T> tree1, BinNode<T> tree2) {
     return containsAll(tree1, tree2) && containsAll(tree2, tree1);
+  }
+  
+  public static <T> String treeToString(BinNode<T> tree) {
+    Queue<BinNode<T>> store = new Queue<>();
+    StringBuilder sb = new StringBuilder();
+    store.insert(tree);
+    
+    while (!store.isEmpty()) {
+      tree = store.remove();
+      sb.append(tree.getValue()).append(", ");
+      if (tree.hasLeft()) store.insert(tree.getLeft());
+      if (tree.hasRight()) store.insert(tree.getRight());
+    }
+    
+    String ret = sb.toString().trim();
+    if (ret.charAt(ret.length() - 1) == ',') return ret.substring(0, ret.length() - 1);
+    return ret;
   }
 }
