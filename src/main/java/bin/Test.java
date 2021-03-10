@@ -3,6 +3,7 @@ package bin;
 import DS.BinNode;
 import static bin.TreeUtils.*;
 import static bin.SearchTreeUtils.*;
+
 public class Test {
   
   public static void main(String[] args) {
@@ -24,8 +25,9 @@ public class Test {
     System.out.println();
     
     BinNode<Integer> st = genSearchTree(4, 6, 2, 3, 5, 87, 2, 4, 6, 1, 0);
-    Printer.printTree(st);
     System.out.println(lookup(st, 5));
     System.out.println(lookup(st, 7));
+    insert(st, 200);
+    Printer.printTree(st);
   }
 }

@@ -24,7 +24,7 @@ public class Printer {
     
     Printer.printWhitespaces(firstSpaces);
     
-    List<BinNode<T>> newNodes = new ArrayList<BinNode<T>>();
+    List<BinNode<T>> newNodes = new ArrayList<>();
     for (BinNode<T> node : nodes) {
       if (node != null) {
         System.out.print(node.getValue());
@@ -38,7 +38,7 @@ public class Printer {
       
       Printer.printWhitespaces(betweenSpaces);
     }
-    System.out.println("");
+    System.out.println();
     
     for (int i = 1; i <= edgeLines; i++) {
       for (int j = 0; j < nodes.size(); j++) {
@@ -63,7 +63,7 @@ public class Printer {
         Printer.printWhitespaces(edgeLines + edgeLines - i);
       }
       
-      System.out.println("");
+      System.out.println();
     }
     
     printTreeInternal(newNodes, level + 1, maxLevel);

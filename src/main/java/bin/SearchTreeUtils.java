@@ -22,6 +22,7 @@ public class SearchTreeUtils {
     }
   }
   
+  @SafeVarargs
   public static <T extends Comparable<T>> BinNode<T> genSearchTree(T... vals) {
     BinNode<T> root = new BinNode<>(vals[0]);
     IntStream.range(1, vals.length).forEach(i -> insert(root, vals[i]));

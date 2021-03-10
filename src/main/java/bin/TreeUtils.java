@@ -105,7 +105,7 @@ public class TreeUtils {
     return 1 + Math.max(cntLvlR(tree.getLeft()), cntLvlR(tree.getRight()));
   }
   
-  private static <T> boolean isBig(BinNode<T> tree) {
+  protected static <T> boolean isBig(BinNode<T> tree) {
     return tree != null && tree.hasLeft() && tree.hasRight();
   }
   
