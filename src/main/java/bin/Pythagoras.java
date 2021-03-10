@@ -14,16 +14,21 @@ public class Pythagoras {
   }
   
   public static boolean isPitag3(BinNode<Integer> ptr) {
+    if (ptr == null || isLeaf(ptr)) return true;
     return isBig(ptr) && // check for both children existing, assumes values != null
         isPitag3(ptr.getValue(), ptr.getLeft().getValue(), ptr.getRight().getValue());
   }
   
   public static boolean isPitagTree(BinNode<Integer> tree) {
-    if (!twoOrZeroSons(tree)) return false;
-    return isPitag3(tree) && isPitag3(tree.getLeft()) && isPitag3(tree.getRight());
+    return isPitag3(tree) &&
+        (!tree.hasLeft() || isPitagTree(tree.getLeft())) &&
+        (!tree.hasRight() || isPitagTree(tree.getRight()));
   }
   
   public static void main(String[] args) {
-    
+    BinNode<Integer> pyt = SearchTreeUtils.genSearchTree(12, 13, 5, 3);
+    pyt.getLeft().setRight(new BinNode<>(4));
+    Printer.printTree(pyt);
+    System.out.println(isPitagTree(pyt));
   }
 }
